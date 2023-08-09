@@ -15,7 +15,7 @@ function AuthProvider({ children }){
             localStorage.setItem("@anoteasy:user", JSON.stringify(user));
             localStorage.setItem("@anoteasy:token", token);
 
-            api.defaults.headers.commom['Authorization'] = `Bearer ${token}`;
+            api.defaults.headers.authorization = `Bearer ${token}`;
 
             setData({ user, token });
 
@@ -35,12 +35,30 @@ function AuthProvider({ children }){
         setData({});
     }
 
+    async function updateProfile({ user }){
+        try{
+
+            await api.put("/users", user);
+            localStorage.setItem("@anoteasy:user", JSON.stringify(user));
+
+            setData({ user, token: data.token });
+            alert('Perfil atualizado com sucesso!');
+
+        } catch (error){
+            if (error.response){
+                alert(error.response.data.message);
+            } else {
+                alert('Não foi possível atualizar o perfil.');
+            }
+        }
+    }
+
     useEffect(() =>{
         const token = localStorage.getItem("@anoteasy:token");
         const user = localStorage.getItem("@anoteasy:user");
 
         if(token && user){
-            api.defaults.headers.commom['Authorization'] = `Bearer ${token}`;
+            api.defaults.headers.authorization = `Bearer ${token}`;
 
             setData({
                 token,
@@ -53,6 +71,7 @@ function AuthProvider({ children }){
         <AuthContext.Provider value={{ 
          singIn,
          singOut,
+         updateProfile,
          user: data.user, 
         }}
         >
