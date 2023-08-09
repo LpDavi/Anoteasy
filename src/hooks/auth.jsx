@@ -15,7 +15,8 @@ function AuthProvider({ children }){
             localStorage.setItem("@anoteasy:user", JSON.stringify(user));
             localStorage.setItem("@anoteasy:token", token);
 
-            api.defaults.headers.authorizantion = `Bearer ${token}`;
+            api.defaults.headers.commom['Authorization'] = `Bearer ${token}`;
+
             setData({ user, token });
 
         }catch (error) {
@@ -39,7 +40,7 @@ function AuthProvider({ children }){
         const user = localStorage.getItem("@anoteasy:user");
 
         if(token && user){
-            api.defaults.headers.authorization = `Bearer ${token}`
+            api.defaults.headers.commom['Authorization'] = `Bearer ${token}`;
 
             setData({
                 token,
