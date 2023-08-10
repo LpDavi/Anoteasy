@@ -13,6 +13,9 @@ import { Container, Form } from './styles';
 export function NewNote() {
     const [links, setLinks] = useState([]);
     const [newLink, setNewLink] = useState("");
+    
+    const [tags, setTags] = useState([]);
+    const [newTag, setNewTag] = useState("");
 
     function handleAddLink(){
         setLinks(prevState => [...prevState, newLink]);
@@ -21,6 +24,11 @@ export function NewNote() {
 
     function handleRemoveLink(deleted){
         setLinks(prevState => prevState.filter(link => link !== deleted));
+    }
+
+    function handleAddTag(){
+        setTags(prevState => [...prevState, newTag]);
+        setNewTag("");
     }
  
     return (
@@ -57,8 +65,25 @@ export function NewNote() {
 
                     <Section title='Markers'>
                         <div className='tags'>
-                            <NoteItem value='react'/>
-                            <NoteItem isNew placeholder='New tag'/>
+                            {
+                                tags.map((tag, index) => (
+                                    <NoteItem
+                                        key={index} 
+                                        value={tag}
+                                        onClick={() => {}}
+                                    />
+
+                                ))
+
+                            }
+
+                            <NoteItem 
+                                isNew 
+                                placeholder='New tag'
+                                onChange={e => setNewTag(e.target.value)}
+                                value={newTag}
+                                onClick={handleAddTag}
+                            />
                         </div>
                     </Section>
 
