@@ -12,6 +12,12 @@ import { Container, Form } from './styles';
 
 export function NewNote() {
     const [links, setLinks] = useState([]);
+    const [newLink, setNewLink] = useState("");
+
+    function handleAddLink(){
+        setLinks(prevState => [...prevState, newLink]);
+        setNewLink("");
+    }
  
     return (
         <Container>
@@ -27,8 +33,22 @@ export function NewNote() {
                     <Textarea placeholder='Observations'/>
 
                     <Section title='Useful links'>
-                        <NoteItem value='https://rocketseat.com.br'/>
-                        <NoteItem isNew placeholder='New link'/>
+                        {
+                            links.map((link, index) =>(
+                                <NoteItem
+                                    key={index}
+                                    value={link}
+                                    onClick={() => {}}
+                                /> 
+                            ))
+                        }
+                        <NoteItem 
+                            isNew 
+                            placeholder='New link'
+                            value={newLink}
+                            onChange={e => setNewLink(e.target.value)}
+                            onClick={handleAddLink}
+                        />
                     </Section>
 
                     <Section title='Markers'>
