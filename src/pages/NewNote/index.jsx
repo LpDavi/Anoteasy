@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { NoteItem } from '../../components/NoteItem';
@@ -10,6 +11,8 @@ import { Container, Form } from './styles';
 
 
 export function NewNote() {
+    const [links, setLinks] = useState([]);
+ 
     return (
         <Container>
             <Header />
