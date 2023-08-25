@@ -12,8 +12,6 @@ import { Input } from '../../components/Input';
 import { Container, Form } from './styles';
 import { api } from '../../services/api';
 
-
-
 export function NewNote() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -51,7 +49,6 @@ export function NewNote() {
 
         if(newLink){
             return alert("Clique em adicionar em todos os links ou deixe o campo vazio.");
-
         }
 
         if(newTag){
@@ -92,7 +89,7 @@ export function NewNote() {
                         {
                             links.map((link, index) =>(
                                 <NoteItem
-                                    key={index}
+                                    key={String(index)}
                                     value={link}
                                     onClick={() => handleRemoveLink(link)}
                                 /> 
@@ -112,11 +109,10 @@ export function NewNote() {
                             {
                                 tags.map((tag, index) => (
                                     <NoteItem
-                                        key={index} 
+                                        key={String(index)} 
                                         value={tag}
                                         onClick={() => handleRemoveTag(tag)}
                                     />
-
                                 ))
 
                             }

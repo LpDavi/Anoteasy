@@ -12,7 +12,7 @@ export function Details() {
       <Header />
       <main>
         <Content>
-          <ButtonText title="Excluir Nota" />
+          <ButtonText title="Delete note" />
 
           <h1>Introdução ao React</h1>
           <p>
